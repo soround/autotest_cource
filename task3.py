@@ -3,7 +3,9 @@
 
 def even_sum(lst):
     # Здесь нужно написать код
+    sum_list = sum(lst[0::2])
     return sum_list
+
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
@@ -18,7 +20,6 @@ data = [
 test_data = [
     16, -16, 338, 0
 ]
-
 
 for i, d in enumerate(data):
     assert even_sum(d) == test_data[i], f'С набором {d} есть ошибка, не проходит проверку'
