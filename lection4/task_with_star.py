@@ -17,8 +17,8 @@ def increase_digit(all_digits, increment):
             all_digits[digit] += increment
             while all_digits[digit] + 3 < 10:
                 all_digits[digit] += 3
-            return True
-    return False
+            return all_digits
+    return all_digits
 
 
 def max_division_by_3(num):
@@ -30,11 +30,7 @@ def max_division_by_3(num):
 
     mod_division = digit_sum % 3
     increment = 3 - mod_division
-    decrement = 3 if mod_division == 0 else mod_division
-
-    if not increase_digit(all_digits, increment):
-        all_digits[-1] -= decrement
-
+    increase_digit(all_digits, increment)
     new_num = int(''.join(map(str, list(all_digits))))
 
     return new_num

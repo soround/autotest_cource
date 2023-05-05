@@ -9,18 +9,18 @@
 import math
 
 
-def get_count_multiplication_nums(num: int, counter: int = 0) -> int:
+def get_count_multy(num: int, counter: int = 0) -> int:
     if len(str(num)) == 1:
         return counter
     else:
         counter += 1
         multy_nums = int(math.prod([int(item) for item in list(str(num))]))
-        return get_count_multiplication_nums(multy_nums, counter)
+        return get_count_multy(multy_nums, counter)
 
 
 def multiplication_chain(num: int) -> int:
     # Здесь нужно написать код
-    count_multy = get_count_multiplication_nums(num, 0)
+    count_multy = get_count_multy(num, 0)
     return count_multy
 
 
