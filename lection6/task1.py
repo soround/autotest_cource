@@ -16,7 +16,7 @@ def global_changes():
     globals()['number'] = 5
     globals()['string'] = 'Hello, dear friend'
 
-    return globals()['number'], globals()['string']
+    return number, string
 
 
 global_changes()
