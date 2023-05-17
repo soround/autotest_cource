@@ -8,30 +8,46 @@
 #
 # Например (Ввод --> Вывод) :
 # 2008 --> MMVIII
+import math
 
 
 def to_roman(val):
-    roman_letters = {
-        1000: "M",
-        900: "CM",
-        500: "D",
-        400: "CD",
-        100: "C",
-        90: "XC",
-        50: "L",
-        40: "XL",
-        10: "X",
-        9: "IX",
+    romans_dict = {
+        1: "I",
         5: "V",
-        4: "IV",
-        1: "I"
+        10: "X",
+        50: "L",
+        100: "C",
+        500: "D",
+        1000: "M",
+        5000: "G",
+        10000: "H"
     }
-    roman_str = ""
-    for cap, roman in roman_letters.items():
-        div, mod = divmod(val, cap)
-        roman_str += roman * div
-        val = mod
-    return roman_str
+
+    div = 1
+    while val >= div:
+        div *= 10
+
+    div /= 10
+
+    str_roman = ""
+
+    while val:
+        last_num = int(val / div)
+
+        if last_num <= 3:
+            str_roman += (romans_dict[div] * last_num)
+        elif last_num == 4:
+            str_roman += (romans_dict[div] + romans_dict[div * 5])
+        elif 5 <= last_num <= 8:
+            str_roman += (romans_dict[div * 5] + (romans_dict[div] * (last_num - 5)))
+        elif last_num == 9:
+            str_roman += (romans_dict[div] + romans_dict[div * 10])
+
+        val = math.floor(val % div)
+        div /= 10
+
+    return str_roman
 
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
