@@ -10,7 +10,34 @@
 
 # Здесь пишем код
 class RomanNums:
-    pass
+    def __init__(self, roman_value: str):
+        """
+
+        :param roman_value: Число в римской записи
+        """
+        self.roman_value = roman_value
+
+    def from_roman(self):
+        """
+        Преобразует число из римской системы в арабскую
+        :return:
+        """
+        result = 0
+        roman = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        for i in range(len(self.roman_value) - 1, -1, -1):
+            num = roman[self.roman_value[i]]
+            if 3 * num < result:
+                result = result - num
+            else:
+                result = result + num
+        return result
+
+    def is_palindrome(self):
+        """
+        Является ли число палиндромом
+        :return:
+        """
+        return str(self.from_roman()) == str(self.from_roman())[::-1]
 
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ

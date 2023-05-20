@@ -23,19 +23,31 @@
 
 
 class PersonInfo:
-    def __init__(self, full_name: str, age: int, *args):
+    def __init__(self, full_name: str, age: int, *deps):
         self.full_name = full_name
         self.age = age
-        self.args = args
+        self.deps = deps
 
     def short_name(self):
-        ...
+        name, surname = self.full_name.split()
+        return f'{surname} {name[0]}.'
 
     def path_deps(self):
-        ...
+        path_deps = ''
+        idx = 0
+        for path in self.deps:
+            if not idx:
+                path_deps += path
+            else:
+                path_deps += f' --> {path}'
+            idx += 1
+
+        return path_deps
 
     def new_salary(self):
-        ...
+        string = ''.join(self.deps)
+        letters_count = {letter: string.count(letter) for letter in string}
+        return 1337 * self.age * sum(sorted(letters_count.values(), reverse=True)[:3:])
 
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ

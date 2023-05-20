@@ -20,12 +20,10 @@ class Segment:
         return round(math.sqrt(math.pow(self.x2 - self.x1, 2) + math.pow(self.y2 - self.y1, 2)), 2)
 
     def x_axis_intersection(self) -> bool:
-        # TODO: Реализовать метод
-        return bool(self.y2 + self.y1 != 0)
+        return (self.y1 >= 0 >= self.y2) or (self.y2 >= 0 >= self.y1)
 
     def y_axis_intersection(self) -> bool:
-        # TODO: Реализовать метод
-        return bool(self.x2 + self.x1 != 0)
+        return (self.x1 >= 0 >= self.x2) or (self.x2 >= 0 >= self.x1)
 
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
