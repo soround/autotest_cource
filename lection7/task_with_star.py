@@ -10,26 +10,20 @@
 
 # Здесь пишем код
 class RomanNums:
-    def __init__(self, roman_value: str):
-        """
-
-        :param roman_value: Число в римской записи
-        """
-        self.roman_value = roman_value
+    def __init__(self, roman_numeral):
+        self.roman_numeral = roman_numeral
 
     def from_roman(self):
-        """
-        Преобразует число из римской системы в арабскую
-        :return:
-        """
+        roman_dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
         result = 0
-        roman = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-        for i in range(len(self.roman_value) - 1, -1, -1):
-            num = roman[self.roman_value[i]]
-            if 3 * num < result:
-                result = result - num
+        prev_value = 0
+        for char in reversed(self.roman_numeral):
+            value = roman_dict[char]
+            if value >= prev_value:
+                result += value
             else:
-                result = result + num
+                result -= value
+            prev_value = value
         return result
 
     def is_palindrome(self):
