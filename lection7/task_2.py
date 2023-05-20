@@ -33,16 +33,7 @@ class PersonInfo:
         return f'{surname} {name[0]}.'
 
     def path_deps(self):
-        path_deps = ''
-        idx = 0
-        for path in self.deps:
-            if not idx:
-                path_deps += path
-            else:
-                path_deps += f' --> {path}'
-            idx += 1
-
-        return path_deps
+        return ' --> '.join(self.deps)
 
     def new_salary(self):
         string = ''.join(self.deps)
