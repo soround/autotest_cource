@@ -9,6 +9,9 @@
 # RomanNums('CMXCIX').is_palindrome() --> True
 
 # Здесь пишем код
+class RomanNums:
+    pass
+
 
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
@@ -36,7 +39,6 @@ data = [RomanNums('MMMCCLXIII').from_roman,
         RomanNums('XXX').is_palindrome,
         RomanNums('D').is_palindrome,
         ]
-
 
 test_data = [3263, 134, 86, 1405, 978, 3404, 910, 2388, 2008, 1179, 3795, 988, 999, 444,
              True, True, False, False, True, True, False, False]

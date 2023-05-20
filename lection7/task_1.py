@@ -8,27 +8,27 @@
 # Segment((2, 3), (4, 5)).length() --> 2.83
 # Segment((-2, -3), (4, 5)).x_axis_intersection() --> True
 # Segment((-2, -3), (4, -5)).y_axis_intersection() --> False
+import math
 
-# Здесь пишем код
 
 class Segment:
-    def __init__(self, coordinates_xy_1, coordinates_xy_2):
-        self.x1, self.y1 = coordinates_xy_1
-        self.x2, self.y2 = coordinates_xy_2
+    def __init__(self, point_one: tuple[int, int], point_two: tuple[int, int]):
+        self.x1, self.y1 = point_one
+        self.x2, self.y2 = point_two
 
-    @property
-    def length(self):
-        return ...
+    def length(self) -> float:
+        return round(math.sqrt(math.pow(self.x2 - self.x1, 2) + math.pow(self.y2 - self.y1, 2)), 2)
 
-    @property
-    def x_axis_intersection(self):
-        return ...
+    def x_axis_intersection(self) -> bool:
+        # TODO: Реализовать метод
+        return bool(self.y2 + self.y1 != 0)
 
-    @property
-    def y_axis_intersection(self):
-        return ...
+    def y_axis_intersection(self) -> bool:
+        # TODO: Реализовать метод
+        return bool(self.x2 + self.x1 != 0)
 
-        # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
+
+# Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
 
 data = [Segment((2, 3), (4, 5)).length,
@@ -38,7 +38,7 @@ data = [Segment((2, 3), (4, 5)).length,
         Segment((-2, -3), (4, 5)).x_axis_intersection,
         Segment((-2, -3), (-4, -2)).x_axis_intersection,
         Segment((0, -3), (4, 5)).x_axis_intersection,
-        Segment((-2, 3), (4, 5)).y_axis_intersection,
+        Segment((2, 3), (4, 5)).y_axis_intersection,
         Segment((-2, -3), (4, 5)).y_axis_intersection,
         Segment((-2, 3), (4, 0)).y_axis_intersection
         ]
