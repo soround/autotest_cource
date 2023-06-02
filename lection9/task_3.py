@@ -5,7 +5,7 @@
 
 # Здесь пишем код
 def find_three_most_expensive_purchases(filename):
-    ...
+    return 1
 
 
 three_most_expensive_purchases = find_three_most_expensive_purchases('./test_file/task_3.txt')

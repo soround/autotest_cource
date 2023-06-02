@@ -39,7 +39,7 @@ import time
 def func_log(file_log='log.txt'):
     def decorator(func):
         def wrapper(*args, **kwargs):
-            with open(file_log, 'a') as file:
+            with open(file_log, 'a', encoding='utf-8') as file:
                 timestamp = datetime.datetime.now().strftime('%d.%m %H:%M:%S')
                 log_text = f"{func.__name__} вызвана {timestamp}\n"
                 file.write(log_text)
