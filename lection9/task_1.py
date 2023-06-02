@@ -1,6 +1,7 @@
 # Дан текстовый файл test_file/task1_data.txt
 # Он содержит текст, в словах которого есть цифры.
 # Необходимо удалить все цифры и записать получившийся текст в файл test_file/task1_answer.txt
+from string import digits
 
 
 # Здесь пишем код
@@ -17,7 +18,8 @@ def save_to_file(filename: str, data: str) -> None:
 
 
 def remove_digits(data: str) -> str:
-    result = ''.join(i for i in data if not i.isdigit())
+    removed_digits = str.maketrans('', '', digits)
+    result = data.translate(removed_digits)
     return result
 
 
