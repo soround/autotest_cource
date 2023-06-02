@@ -33,13 +33,11 @@
 
 import datetime
 import time
-from functools import wraps
 
 
 # Здесь пишем код
 def func_log(file_log='log.txt'):
     def decorator(func):
-        @wraps(func)
         def wrapper(*args, **kwargs):
             with open(file_log, 'a') as file:
                 timestamp = datetime.datetime.now().strftime('%d.%m %H:%M:%S')
@@ -54,7 +52,7 @@ def func_log(file_log='log.txt'):
 
 @func_log()
 def func1():
-    # Some function description
+    """Some function description"""
     time.sleep(3)
 
 
