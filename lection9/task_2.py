@@ -46,6 +46,7 @@ def func_log(file_log='log.txt'):
                 log_text = f"{func.__name__} вызвана {timestamp}\n"
                 file.write(log_text)
             return func(*args, **kwargs)
+
         return wrapper
 
     return decorator
@@ -61,10 +62,9 @@ def func1():
 def func2():
     time.sleep(5)
 
-help(func1)
 
+help(func1)
 
 func1()
 func2()
 func1()
-
