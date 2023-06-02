@@ -33,12 +33,61 @@
 
 import datetime
 import time
-from functools import wraps
+
+WRAPPER_ASSIGNMENTS = ('__module__', '__name__', '__qualname__', '__doc__',
+                       '__annotations__')
+WRAPPER_UPDATES = ('__dict__',)
+
+
+def update_wrapper(wrapper,
+                   wrapped,
+                   assigned=WRAPPER_ASSIGNMENTS,
+                   updated=WRAPPER_UPDATES):
+    for attr in assigned:
+        try:
+            value = getattr(wrapped, attr)
+        except AttributeError:
+            pass
+        else:
+            setattr(wrapper, attr, value)
+    for attr in updated:
+        getattr(wrapper, attr).update(getattr(wrapped, attr, {}))
+    wrapper.__wrapped__ = wrapped
+    return wrapper
+
+
+def custom_wraps(wrapped,
+                 assigned=WRAPPER_ASSIGNMENTS,
+                 updated=WRAPPER_UPDATES):
+    return partial(update_wrapper, wrapped=wrapped,
+                   assigned=assigned, updated=updated)
+
+
+class partial:
+    __slots__ = "func", "args", "keywords", "__dict__", "__weakref__"
+
+    def __new__(cls, func, /, *args, **keywords):
+        if hasattr(func, "func"):
+            args = func.args + args
+            keywords = {**func.keywords, **keywords}
+            func = func.func
+
+        self = super(partial, cls).__new__(cls)
+
+        self.func = func
+        self.args = args
+        self.keywords = keywords
+        return self
+
+    def __call__(self, /, *args, **keywords):
+        keywords = {**self.keywords, **keywords}
+        return self.func(*self.args, *args, **keywords)
 
 
 # Здесь пишем код
 def func_log(file_log='log.txt'):
     def decorator(func):
+        @custom_wraps(func)
         def wrapper(*args, **kwargs):
             with open(file_log, 'a', encoding='utf-8') as file:
                 timestamp = datetime.datetime.now().strftime('%d.%m %H:%M:%S')
@@ -46,11 +95,11 @@ def func_log(file_log='log.txt'):
                 file.write(log_text)
             return func(*args, **kwargs)
 
-        wrapper.__module__ = getattr(func, '__module__')
-        wrapper.__doc__ = getattr(func, '__doc__')
-        wrapper.__name__ = getattr(func, '__name__')
-        wrapper.__qualname__ = getattr(func, '__qualname__')
-        wrapper.__annotations__ = getattr(func, '__annotations__', {})
+        # wrapper.__module__ = getattr(func, '__module__')
+        # wrapper.__doc__ = getattr(func, '__doc__')
+        # wrapper.__name__ = getattr(func, '__name__')
+        # wrapper.__qualname__ = getattr(func, '__qualname__')
+        # wrapper.__annotations__ = getattr(func, '__annotations__', {})
         return wrapper
 
     return decorator
