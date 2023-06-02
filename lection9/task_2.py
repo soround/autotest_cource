@@ -33,6 +33,7 @@
 
 import datetime
 import time
+from functools import wraps
 
 
 # Здесь пишем код
@@ -45,11 +46,11 @@ def func_log(file_log='log.txt'):
                 file.write(log_text)
             return func(*args, **kwargs)
 
-        wrapper.__name__ = func.__name__
-        wrapper.__qualname__ = func.__qualname__
-        wrapper.__doc__ = func.__doc__
-        wrapper.__module__ = func.__module__
-        wrapper.__annotations__ = func.__annotations__
+        wrapper.__module__ = getattr(func, '__module__')
+        wrapper.__doc__ = getattr(func, '__doc__')
+        wrapper.__name__ = getattr(func, '__name__')
+        wrapper.__qualname__ = getattr(func, '__qualname__')
+        wrapper.__annotations__ = getattr(func, '__annotations__', {})
         return wrapper
 
     return decorator
