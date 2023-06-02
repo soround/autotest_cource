@@ -5,6 +5,26 @@
 
 # Здесь пишем код
 
+def read_data(filename: str) -> str:
+    with open(filename, 'r', encoding='utf-8') as file:
+        result = file.read()
+    return result
+
+
+def save_to_file(filename: str, data: str) -> None:
+    with open(filename, 'w', encoding='utf-8') as file:
+        file.write(data)
+
+
+def remove_digits(data: str) -> str:
+    result = ''.join(i for i in data if not i.isdigit())
+    return result
+
+
+raw_data = read_data('test_file/task1_data.txt')
+formatted_data = remove_digits(raw_data)
+save_to_file('test_file/task1_answer.txt', formatted_data)
+
 # Ниже НИЧЕГО НЕ НАДО ИЗМЕНЯТЬ
 
 

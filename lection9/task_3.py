@@ -4,5 +4,10 @@
 # Нужно найти сумму трёх самых дорогих покупок, которые запишутся в переменную three_most_expensive_purchases
 
 # Здесь пишем код
+def find_three_most_expensive_purchases(filename):
+    ...
+
+
+three_most_expensive_purchases = find_three_most_expensive_purchases('./test_file/task_3.txt')
 
 assert three_most_expensive_purchases == 202346
