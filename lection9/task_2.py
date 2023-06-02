@@ -45,12 +45,14 @@ def func_log(file_log='log.txt'):
                 file.write(log_text)
             return func(*args, **kwargs)
 
+        wrapper.__name__ = func.__name__
+        wrapper.__doc__ = func.__doc__
         return wrapper
 
     return decorator
 
 
-@func_log()
+# @func_log()
 def func1():
     """Some function description"""
     time.sleep(3)
@@ -62,7 +64,7 @@ def func2():
 
 
 help(func1)
-
-func1()
-func2()
-func1()
+#
+# func1()
+# func2()
+# func1()
