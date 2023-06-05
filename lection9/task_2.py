@@ -84,11 +84,13 @@ def func2():
 help(func1)
 
 
-# def func1(a=1):
-#     """Some function description"""
-#     print(a)
-#     time.sleep(3)
+def func1(a=1):
+    """Some function description"""
+    print(a)
+    time.sleep(3)
 
+
+help(func1)
 # func1()
 # func2()
 # func1()
