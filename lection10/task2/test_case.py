@@ -16,24 +16,28 @@ def all_division(*arg1):
     return division
 
 
-@pytest.mark.smoke
 def test_division_positive_numbers():
-    assert all_division(10, 2, 5) == 1
+    result = all_division(10, 2)
+    assert result == 5
 
 
 def test_division_negative_numbers():
-    assert all_division(-10, 2, -5) == 1
-
-
-def test_division_fractional_numbers():
-    assert all_division(10.0, 2.5) == 4.0
+    result = all_division(-20, 4)
+    assert result == -5
 
 
 @pytest.mark.smoke
-def test_division_zero_denominator():
+def test_division_zero_as_dividend():
+    result = all_division(0, 5)
+    assert result == 0
+
+
+@pytest.mark.smoke
+def test_division_zero_as_divisor():
     with pytest.raises(ZeroDivisionError):
-        all_division(10, 0, 5)
+        all_division(10, 0)
 
 
-def test_division_single_number():
-    assert all_division(10) == 10
+def test_division_multiple_numbers():
+    result = all_division(100, 2, 5)
+    assert result == 10

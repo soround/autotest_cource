@@ -7,7 +7,7 @@ import pytest
 
 class TestClass:
 
-    def test_one(self, test_fixture):
+    def test_one(self, session_fixture):
         assert 1 == 1
 
     def test_two(self):

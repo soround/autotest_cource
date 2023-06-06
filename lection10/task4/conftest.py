@@ -6,23 +6,19 @@ import datetime
 def session_fixture():
     start_time = datetime.datetime.now()
     print(f"Test session started at {start_time}")
-    print()
 
     yield
 
     end_time = datetime.datetime.now()
     print(f"Test session ended at {end_time}")
-    print()
 
 
 @pytest.fixture
-def test_fixture():
+def test_fixture(request):
     start_time = datetime.datetime.now()
-    print(f"Test started at {start_time}")
-    print()
+    print(f"Test '{request.node.name}' started at {start_time}")
 
     yield
 
     end_time = datetime.datetime.now()
-    print(f"Test ended at {end_time}")
-    print()
+    print(f"Test '{request.node.name}' ended at {end_time}")
