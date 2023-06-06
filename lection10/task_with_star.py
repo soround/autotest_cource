@@ -6,9 +6,9 @@ import pytest
 
 
 @pytest.mark.id_check(1, 2, 3)
-def test():
-    marker = pytest.mark.id_check
-    args = marker.args
-    print(*args)
-    # Здесь пишем остальной код тестовой функции
-    pass
+def test_example():
+    marker_args = test_example.pytestmark[0].args
+    print('\n>>>', *marker_args)
+
+
+test_example()
