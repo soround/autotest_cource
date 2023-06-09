@@ -3,7 +3,7 @@ import datetime
 import pytest
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="class", autouse=True)
 def session_fixture():
     start_time = datetime.datetime.now()
     print(f"[] Тесты запущены в {start_time} ")
