@@ -36,7 +36,7 @@ import time
 
 
 def custom_wraps(func):
-    def wrapper(*args, **kwargs):
+    def wrapper(*_, **__):
         return func
 
     wrapper.__module__ = getattr(func, '__module__')

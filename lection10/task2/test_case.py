@@ -16,12 +16,12 @@ def all_division(*arg1):
     return division
 
 
-def test_division_positive_numbers():
+def test_division_positive():
     result = all_division(10, 2)
     assert result == 5
 
 
-def test_division_negative_numbers():
+def test_division_negative():
     result = all_division(-20, 4)
     assert result == -5
 
