@@ -6,6 +6,7 @@
 # Вывести на печать размер скачанного файла в мегабайтах
 # Для сдачи задания пришлите код и запись с экрана прохождения теста
 import os
+import platform
 from pathlib import Path
 from time import sleep
 
@@ -21,7 +22,7 @@ def get_current_work_directory() -> str:
 def convert_bytes(byte_value, to_unit):
     units = {'bytes': 1, 'KB': 1024, 'MB': 1024 ** 2, 'GB': 1024 ** 3}
     converted_value = byte_value / units[to_unit]
-    return f"{converted_value:.1f} {to_unit}"
+    return f"{converted_value:.2f} {to_unit}"
 
 
 options = Options()
@@ -44,9 +45,7 @@ try:
     plugin_link = driver.find_element(By.CSS_SELECTOR, 'div[data-id="plugin"]')
     plugin_link.click()
 
-    # platform_name = platform.system()
-    platform_name = "Windows"
-
+    platform_name = platform.system()
     match platform_name:
         case "Darwin":
             tab_selector = 'div[data-id="macos"]'
@@ -63,7 +62,13 @@ try:
     download_link = driver.find_element(By.CSS_SELECTOR, link_selector)
     download_link.click()
 
-    file_path = Path('sbisplugin-setup-web.exe')
+    match platform_name:
+        case "Darwin":
+            file_path = Path('sbis3plugin-setup.pkg')
+        case "Linux":
+            file_path = Path('sabyapps-setup')
+        case _:
+            file_path = Path('sbisplugin-setup-web.exe')
 
     while not file_path.exists():
         sleep(1)
