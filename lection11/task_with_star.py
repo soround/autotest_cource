@@ -5,6 +5,7 @@
 # Убедиться, что плагин скачался
 # Вывести на печать размер скачанного файла в мегабайтах
 # Для сдачи задания пришлите код и запись с экрана прохождения теста
+import os
 from pathlib import Path
 from time import sleep
 
@@ -17,12 +18,10 @@ def get_current_work_directory() -> str:
     return str(Path.cwd())
 
 
-def convert_bytes(size):
-    """ Convert bytes to KB, or MB or GB"""
-    for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
-        if size < 1024.0:
-            return "%3.1f %s" % (size, x)
-        size /= 1024.0
+def convert_bytes(byte_value, to_unit):
+    units = {'bytes': 1, 'KB': 1024, 'MB': 1024 ** 2, 'GB': 1024 ** 3}
+    converted_value = byte_value / units[to_unit]
+    return f"{converted_value:.1f} {to_unit}"
 
 
 options = Options()
@@ -64,13 +63,14 @@ try:
     download_link = driver.find_element(By.CSS_SELECTOR, link_selector)
     download_link.click()
 
-    sleep(5)
-
     file_path = Path('sbisplugin-setup-web.exe')
+
+    while not file_path.exists():
+        sleep(1)
 
     assert file_path.is_file()
     print(f"Файл {file_path}  скачался")
-    print(f"Файл {file_path} весит {convert_bytes(file_path.stat().st_size)}")
+    print(f"Файл {file_path} весит {convert_bytes(os.path.getsize(file_path), 'MB')}")
 
 
 except Exception as e:
