@@ -51,10 +51,10 @@ try:
     match platform_name:
         case "Darwin":
             tab_selector = 'div[data-id="macos"]'
-            link_selector = 'div.ws-SwitchableArea__item.ws-component.ws-enabled.ws-has-focus > div.sbis_ru-DownloadNew-block.sbis_ru-DownloadNew-flex > div:nth-child(2) > div:nth-child(2) > a'
+            link_selector = 'a[href="https://update.sbis.ru/Sbis3Plugin/master/arm64/darwin/sbis3plugin-setup.pkg"]'
         case "Linux":
             tab_selector = 'div[data-id="linux"]'
-            link_selector = 'div.ws-SwitchableArea__item.ws-component.ws-enabled.ws-has-focus > ol > li:nth-child(1) > p > a'
+            link_selector = 'a[href="https://update.sbis.ru/Sbis3Plugin/master/linux/sabyapps-setup"]'
         case _:
             tab_selector = '[data-for="plugin"] [sbisname="TabButtons"] div[data-id="default"]'
             link_selector = 'a[href="https://update.sbis.ru/Sbis3Plugin/master/win32/sbisplugin-setup-web.exe"]'
