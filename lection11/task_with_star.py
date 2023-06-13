@@ -30,18 +30,19 @@ options.add_experimental_option("prefs", {
     "download.default_directory": get_current_work_directory(),
     "download.prompt_for_download": False,
     "download.directory_upgrade": True,
+    "safebrowsing.enabled": True
 })
 
 driver = webdriver.Chrome(options=options)
 
 try:
     driver.get("https://sbis.ru/")
-    sleep(5)
+    sleep(1)
     footer = driver.find_element(By.CSS_SELECTOR, '.sbisru-Footer')
     driver.execute_script("return arguments[0].scrollIntoView(true);", footer)
     download_sbis = driver.find_element(By.LINK_TEXT, 'Скачать СБИС')
     download_sbis.click()
-    sleep(5)
+    sleep(1)
     plugin_link = driver.find_element(By.CSS_SELECTOR, 'div[data-id="plugin"]')
     plugin_link.click()
 
