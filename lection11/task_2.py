@@ -18,11 +18,11 @@ try:
 
     driver.get("https://fix-online.sbis.ru/")
     sleep(5)
-
+    user_login, user_password = "perf_tester", "perf_tester123"
     login = driver.find_element(By.CSS_SELECTOR, '[name="Login"]')
-    login.send_keys(getenv("login") + Keys.ENTER)
+    login.send_keys(user_login + Keys.ENTER)
     password = driver.find_element(By.CSS_SELECTOR, '[name="Password"]')
-    password.send_keys(getenv("password") + Keys.ENTER)
+    password.send_keys(user_password + Keys.ENTER)
     sleep(5)
 
     assert driver.current_url == "https://fix-online.sbis.ru/", 'Неверный адрес сайта'
