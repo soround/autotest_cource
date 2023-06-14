@@ -10,6 +10,7 @@
 from time import sleep
 
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 driver = webdriver.Chrome()
@@ -17,6 +18,7 @@ driver = webdriver.Chrome()
 try:
 
     site = "https://sbis.ru/"
+    driver.maximize_window()
     driver.get(site)
 
     sleep(1)
@@ -31,7 +33,8 @@ try:
     sleep(5)
 
     news_block = driver.find_element(By.CSS_SELECTOR, ".tensor_ru-Index__block4-content > .tensor_ru-Index__card-title")
-    driver.execute_script("return arguments[0].scrollIntoView(true);", news_block)
+    # actions = ActionChains(driver)
+    # actions.scroll_to_element(news_block)
     assert news_block.is_displayed(), 'Блока нет на странице'
     assert news_block.text == "Сила в людях"
 
