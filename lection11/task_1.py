@@ -29,10 +29,8 @@ try:
     logo = driver.find_element(By.CSS_SELECTOR, '[title="tensor.ru"]')
     logo.click()
     driver.switch_to.window(driver.window_handles[-1])
-    sleep(5)
 
     news_block = driver.find_element(By.CSS_SELECTOR, ".tensor_ru-Index__block4-content > .tensor_ru-Index__card-title")
-
     assert news_block.is_displayed(), 'Блока нет на странице'
     assert news_block.text == "Сила в людях"
 
