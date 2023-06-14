@@ -4,7 +4,7 @@
 # Убедиться, что сообщение появилось в реестре
 # Удалить это сообщение и убедиться, что удалили
 # Для сдачи задания пришлите код и запись с экрана прохождения теста
-import platform
+
 from os import getenv
 from time import sleep
 
@@ -17,21 +17,19 @@ driver = webdriver.Chrome()
 try:
 
     driver.get("https://fix-online.sbis.ru/")
-    sleep(5)
-    user_login, user_password = "perf_tester", "perf_tester123"
+    sleep(1)
     login = driver.find_element(By.CSS_SELECTOR, '[name="Login"]')
-    login.send_keys(user_login + Keys.ENTER)
+    login.send_keys(getenv("login") + Keys.ENTER)
     password = driver.find_element(By.CSS_SELECTOR, '[name="Password"]')
-    password.send_keys(user_password + Keys.ENTER)
+    password.send_keys(getenv("password") + Keys.ENTER)
     sleep(5)
 
     assert driver.current_url == "https://fix-online.sbis.ru/", 'Неверный адрес сайта'
     print("Авторизовались")
 
-    sleep(5)
+    sleep(1)
 
-    accordion_contacts = driver.find_element(By.XPATH,
-                                             '//*[@id="wasaby-content"]/div/div/div[2]/div[3]/div/div/div[1]/div/div[2]/div/div/div/div[2]/a[1]/span[3]')
+    accordion_contacts = driver.find_element(By.CSS_SELECTOR, 'a[href="/page/dialogs"]')
     accordion_contacts.click()
     sleep(1)
     contacts = driver.find_element(By.CSS_SELECTOR, '[data-qa="Контакты"] .NavigationPanels-SubMenu__headTitle')
@@ -49,24 +47,26 @@ try:
     search_input.send_keys(self_name)
     search_input.send_keys(Keys.ENTER)
 
-    sleep(5)
+    sleep(1)
 
     myself = driver.find_element(By.CSS_SELECTOR, 'span[data-qa="person-Information__fio"]')
     myself.click()
 
-    sleep(5)
+    sleep(1)
 
     text_input = driver.find_element(By.CSS_SELECTOR, '[data-qa="textEditor_slate_Field"]')
     sleep(1)
-    text_input.send_keys('Привет' + Keys.ENTER)
 
+    user_message = 'Привет'
+
+    text_input.send_keys(user_message + Keys.ENTER)
     driver.find_element(By.CSS_SELECTOR, '[title="Отправить"]').click()
     sleep(1)
 
     message_title = driver.find_element(By.CSS_SELECTOR,
                                         '.msg-dialogs-item__title [title="Тестирование Производительности"]')
     message_text = driver.find_element(By.CSS_SELECTOR, '.msg-entity-content_outgoing p')
-    assert message_text.text == "Привет"
+    assert message_text.text == user_message
     assert message_text.is_displayed()
 
     print("Отправили сообщение самому себе")
