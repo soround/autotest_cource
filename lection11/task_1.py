@@ -33,14 +33,14 @@ try:
     sleep(5)
 
     news_block = driver.find_element(By.CSS_SELECTOR, ".tensor_ru-Index__block4-content > .tensor_ru-Index__card-title")
-    # actions = ActionChains(driver)
-    # actions.scroll_to_element(news_block)
+
     assert news_block.is_displayed(), 'Блока нет на странице'
     assert news_block.text == "Сила в людях"
 
     about_lnk = driver.find_element(By.CSS_SELECTOR, '.tensor_ru-Index__block4-bg .tensor_ru-link')
-    about_lnk.click()
-    sleep(5)
+    if news_block.location_once_scrolled_into_view:
+        about_lnk.click()
+
     assert driver.current_url == "https://tensor.ru/about"
 
 except AssertionError as e:
